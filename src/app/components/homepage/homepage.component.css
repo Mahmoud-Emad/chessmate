@@ -1,12 +1,38 @@
-.header {
-    padding: 20px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    width: 100%;
-    text-align: center;
+.btn-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 12px;
+    margin-bottom: 12px;
+    /* box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); */
+    padding: 10px;
 }
 
-.childs {
-    width: 100%;
-    margin: 0 auto;
-    margin-top: 5rem;
+.background-transparent {
+    background: transparent;
+}
+
+.border-color {
+    border-color: #FFDB58;
+}
+
+.welcome-message {
+    font-size: 19px;
+    font-family: system-ui;
+    font-weight: 500;
+    background: #191919;
+}
+
+.header {
+    font-size: 3rem;
+    font-weight: bold;
+    text-align: center;
+    color: #fff;
+    text-shadow: 1px 1px 2px #000;
+    margin-top: 2rem;
+    margin-bottom: 4rem;
+}
+
+.custom-input {
+    width: 50%;
 }

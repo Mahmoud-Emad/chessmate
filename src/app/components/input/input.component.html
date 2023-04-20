@@ -1,0 +1,3 @@
+<input name="inputName" [(ngModel)]="value" [placeholder]="placeholder" [class]="classStyle" (keyup)="onKey($event)"
+    [disabled]="disabled">
+<div *ngIf="error.length" class="error-message text-danger mt-2">{{ error }}</div>

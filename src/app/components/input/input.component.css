@@ -1,0 +1,24 @@
+.error-message {
+    text-align: center;
+    width: 100%;
+}
+
+.has-error {
+    box-shadow: none;
+    border: solid 2px #ff1717 !important;
+}
+
+.is-success {
+    box-shadow: none;
+    border: solid 2px #27ff13 !important;
+}
+
+.form-control:disabled {
+    background-color: var(--bs-secondary-bg);
+    opacity: 1;
+    text-align: center;
+    color: black;
+    background: floralwhite;
+    font-size: 18px;
+    font-weight: 800;
+}

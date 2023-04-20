@@ -1,16 +1,82 @@
 <div class="container">
-    <div class="header mt-4">
-        <h1>Chess Game</h1>
+    <div class="alert p-3 text-center mt-2">
+        <h1 class="header text-light">Chessmate</h1>
     </div>
-    <div class="row childs">
-        <div class="col-6">
-            <div class="iframe-container">
-                <iframe src="http://localhost:4200/iframepage?revers=true" frameborder="0"></iframe>
+    <div class="card-title text-light alert p-3 text-center welcome-message">
+        Play chess with friends online or locally with our interactive chess game. Simply create a new room or
+        join an existing one by sharing the unique room link with your friend. You can also play against
+        yourself in local mode to improve your skills. Enjoy the timeless game of chess with our user-friendly
+        interface and customizable game settings.
+    </div>
+    <div class="col-12 d-flex justify-content-center align-items-center">
+        <div class="card w-100 background-transparent border-color">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="col-12 d-flex justify-content-center align-items-center btn-center">
+                            <app-button (click)="displayNewRoomInput()" classStyle="btn action-btn">
+                                Play New Game
+                            </app-button>
+                        </div>
+                        <div class="col-12 d-flex justify-content-center align-items-center btn-center">
+                            <app-button (click)="displayJoinRoomInput()" classStyle="btn action-btn">
+                                Join Game
+                            </app-button>
+                        </div>
+                        <div class="col-12 d-flex justify-content-center align-items-center btn-center">
+                            <a class="btn action-btn" href="/play/local/">
+                                Play Local 1:1
+                            </a>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="col-6">
-            <div class="iframe-container">
-                <iframe class="rotate" src="http://localhost:4200/iframepage?revers=false" frameborder="0"></iframe>
+
+    </div>
+
+    <!-- New Game -->
+    <div *ngIf="isNewGame" class="mt-4">
+        <div class="card w-100 background-transparent border-color">
+            <div class="card-title m-4 text-light alert p-3 text-center welcome-message">
+                we recommend that users give us a name for them to display in the game room, otherwise, we'll generate a
+                random name.
+            </div>
+
+            <div class="col-12 d-flex m-0 justify-content-center align-items-center btn-center">
+                <app-input [disabled]="true" [value]="playerName" classStyle="form-control m-0 custom-input"
+                    placeholder="The player's name will be displayed here!"
+                    [validate]="validateGeneratePlayerName"></app-input>
+            </div>
+
+            <div class="col-12 d-flex justify-content-center align-items-center btn-center">
+                <app-button (click)="generatePlayerName()" classStyle="btn action-btn">
+                    Generate a Random Name
+                </app-button>
+
+                <app-button [disabled]="playerName.length <= 0" (click)="generateNewRoom()" classStyle="btn action-btn">
+                    Create New Room
+                </app-button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Join Room -->
+    <div *ngIf="isInvitation" class="mt-4">
+        <div class="card w-100 background-transparent border-color">
+            <div class="card-title m-4 text-light alert p-3 text-center welcome-message">
+                Please Make Sure That You Have A Valid Room ID or Room Link.
+            </div>
+
+            <div class="col-12 d-flex m-0 justify-content-center align-items-center btn-center">
+                <app-input classStyle="form-control m-0 custom-input" placeholder="Room Link / Room ID"
+                    [validate]="validateRoomLink"></app-input>
+            </div>
+
+            <div class="col-12 d-flex justify-content-center align-items-center btn-center">
+                <app-button (click)="displayJoinRoomInput()" classStyle="btn action-btn">
+                    Join Me
+                </app-button>
             </div>
         </div>
     </div>
