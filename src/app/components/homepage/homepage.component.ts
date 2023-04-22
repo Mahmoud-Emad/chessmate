@@ -1,12 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { inputValidation } from 'src/app/utils/types';
+import { ISession, inputValidation } from 'src/app/utils/types';
 import { Router } from '@angular/router';
 import {
+  RGLINK,
+  RGUUID,
   isValidName,
   isValidRoomID,
   isValidRoomLink,
 } from 'src/app/utils/validator';
 import { v4 as uuidv4 } from 'uuid';
+import { FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-homepage',
@@ -18,8 +21,8 @@ export class HomepageComponent implements OnInit {
 
   public isInvitation: boolean = false;
   public isNewGame: boolean = false;
-  public roomID!: string;
-  public playerName: string = '';
+  public username: string = '';
+  public inputValue: string = '';
 
   ngOnInit(): void {}
 
@@ -28,17 +31,32 @@ export class HomepageComponent implements OnInit {
   }
 
   generateNewRoom() {
-    if (!this.playerName || this.playerName.length == 0) {
-    }
-    this.roomID = this.generateUUID();
-    this.router.navigate([`/room/${this.roomID}`], {
-      queryParams: { playerName: this.playerName },
-    });
+    const session: ISession = {
+      user: { username: this.username, isPlayer: true },
+      roomID: uuidv4(),
+    };
+    localStorage.setItem('session', JSON.stringify(session));
+    this.router.navigate([`/room/${session.roomID}`]);
   }
 
   displayJoinRoomInput(): void {
     this.isInvitation = true;
     this.isNewGame = false;
+    if (this.validateRoomLink(this.inputValue).isValid) {
+      const session: ISession = {
+        user: { username: this.username, isPlayer: true },
+        roomID: this.inputValue,
+      };
+      localStorage.setItem('session', JSON.stringify(session));
+      if (RGLINK.test(this.inputValue)) {
+        this.router.navigate([this.inputValue]);
+        // Link Case.
+      } else {
+        if (RGUUID.test(this.inputValue)) {
+          this.router.navigate([`/room/${this.inputValue}`]);
+        }
+      }
+    }
   }
 
   displayNewRoomInput(): void {
@@ -59,19 +77,19 @@ export class HomepageComponent implements OnInit {
     }
   }
 
-  validateGeneratePlayerName(value: string): inputValidation {
+  validateGenerateusername(value: string): inputValidation {
     let onValidateRoom: inputValidation = {
       isValid: false,
       errorMessage: '',
     };
 
     if (isValidName(value, onValidateRoom).isValid) {
-      this.playerName = value;
+      this.username = value;
     }
     return onValidateRoom;
   }
 
-  generatePlayerName(): string {
+  generateusername(): string {
     const words = [
       'Galaxy',
       'Nebula',
@@ -85,7 +103,7 @@ export class HomepageComponent implements OnInit {
       'Orbit',
     ];
     const index = Math.floor(Math.random() * words.length);
-    this.playerName = words[index];
-    return this.playerName;
+    this.username = words[index];
+    return this.username;
   }
 }

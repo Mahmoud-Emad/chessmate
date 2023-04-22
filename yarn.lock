@@ -237,6 +237,13 @@
   dependencies:
     tslib "^2.2.0"
 
+"@angular/material@~12.0.2":
+  version "12.0.6"
+  resolved "https://registry.yarnpkg.com/@angular/material/-/material-12.0.6.tgz#d30c8c75b90aa259f5a25bd3b98ba95103f2446d"
+  integrity sha512-xZ3+f+obADIg1nRaTBy43/+lvCDkG/5J6SXOgCVP60rZJ3NYhlMcYvRcY8c2sd1//PCOJ+nQeGx3NHxhC7dUqA==
+  dependencies:
+    tslib "^2.1.0"
+
 "@angular/platform-browser-dynamic@~12.2.0":
   version "12.2.17"
   resolved "https://registry.yarnpkg.com/@angular/platform-browser-dynamic/-/platform-browser-dynamic-12.2.17.tgz#6b3e3fc7707f9a10c06fb18f509f3f451eef3c82"
@@ -1781,6 +1788,13 @@
   integrity sha512-TfRP53RqunNe2HBobVBJ0VLhK1HbfvBYeTC1ahnN64PWvyYyGebmMiPkuwvD9fpw2ZbkoPb8Q7mwy0aR8Z9rvw==
   dependencies:
     lodash "^4.17.21"
+
+"@ngrx/store@~12.2.0":
+  version "12.2.0"
+  resolved "https://registry.yarnpkg.com/@ngrx/store/-/store-12.2.0.tgz#3b413d95e1b311ea8598f6eaee3cc7ae890f8619"
+  integrity sha512-DV1Yu4VhuSV6OfeHFdKEhuQTcHTMkn0igT6V3/x/FpzJ8vaq7tAN78iALMydce+YX+FcdFgj3cr3URQfYfisMA==
+  dependencies:
+    tslib "^2.0.0"
 
 "@ngtools/webpack@12.2.18":
   version "12.2.18"

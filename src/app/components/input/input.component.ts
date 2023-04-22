@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { inputValidation } from 'src/app/utils/types';
 
 @Component({
@@ -13,6 +13,7 @@ export class InputComponent implements OnInit {
   @Input() inputName!: string;
   @Input() disabled!: boolean;
   @Input() validate!: (value: string) => inputValidation;
+  @Output() onValueChange = new EventEmitter<string>();
 
   error: string = '';
 

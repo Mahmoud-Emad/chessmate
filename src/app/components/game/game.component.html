@@ -7,17 +7,17 @@
                         <small class="text-light">
                             <strong class="text-warning">System message</strong> Player
                             <strong class="text-warning">
-                                `{{playerName}}`
+                                <!-- `{{event.user.username}}` -->
                             </strong>
                             has been joined!
                         </small>
                     </div>
 
-                    <div *ngFor="let message of getMessages()">
+                    <div *ngFor="let message of messages">
                         <span>
-                            {{message.message}}
+                            {{event}}
                         </span>
-                        <!-- <div *ngIf="message.playerName == playerName && message.roomID == roomID"
+                        <!-- <div *ngIf="message.username == username && message.roomID == roomID"
                             class="player1-message">
                         </div>
                         <div *ngIf else class="player2-message">
@@ -28,23 +28,26 @@
                     </div>
 
                 </div>
-                <div class="row">
-                    <div class="col-10 p-0">
-                        <input placeholder="Write message!" [(ngModel)]="messageValue" type="text"
-                            class="form-control m-0 custom-input">
+                <form [formGroup]="form" (ngSubmit)="onMessageSubmit(form.value)">
+                    <div class="row">
+                        <div class="col-10 p-0">
+                            <input formControlName="messageContent" matInput placeholder="Write message!" type="text"
+                                class="form-control m-0 custom-input">
+                        </div>
+                        <div class="col-2 p-0">
+                            <button type="submit" class="btn action-btn m-0 w-80" matSuffix mat-icon-button
+                                aria-label="Submit">
+                                <mat-icon>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                        class="bi bi-send" viewBox="0 0 16 16">
+                                        <path
+                                            d="M15.854.146a.5.5 0 0 1 .11.54l-5.819 14.547a.75.75 0 0 1-1.329.124l-3.178-4.995L.643 7.184a.75.75 0 0 1 .124-1.33L15.314.037a.5.5 0 0 1 .54.11ZM6.636 10.07l2.761 4.338L14.13 2.576 6.636 10.07Zm6.787-8.201L1.591 6.602l4.339 2.76 7.494-7.493Z" />
+                                    </svg>
+                                </mat-icon>
+                            </button>
+                        </div>
                     </div>
-                    <div class="col-2 p-0">
-                        <app-button (click)="sendMessage()" classStyle="btn action-btn m-0 w-80">
-                            <span>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                    class="bi bi-send" viewBox="0 0 16 16">
-                                    <path
-                                        d="M15.854.146a.5.5 0 0 1 .11.54l-5.819 14.547a.75.75 0 0 1-1.329.124l-3.178-4.995L.643 7.184a.75.75 0 0 1 .124-1.33L15.314.037a.5.5 0 0 1 .54.11ZM6.636 10.07l2.761 4.338L14.13 2.576 6.636 10.07Zm6.787-8.201L1.591 6.602l4.339 2.76 7.494-7.493Z" />
-                                </svg>
-                            </span>
-                        </app-button>
-                    </div>
-                </div>
+                </form>
             </div>
         </div>
         <div class="col-8 d-flex justify-content-center align-items-center">

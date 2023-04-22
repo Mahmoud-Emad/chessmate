@@ -44,17 +44,17 @@
             </div>
 
             <div class="col-12 d-flex m-0 justify-content-center align-items-center btn-center">
-                <app-input [disabled]="true" [value]="playerName" classStyle="form-control m-0 custom-input"
+                <app-input [disabled]="true" [value]="username" classStyle="form-control m-0 custom-input"
                     placeholder="The player's name will be displayed here!"
-                    [validate]="validateGeneratePlayerName"></app-input>
+                    [validate]="validateGenerateusername"></app-input>
             </div>
 
             <div class="col-12 d-flex justify-content-center align-items-center btn-center">
-                <app-button (click)="generatePlayerName()" classStyle="btn action-btn">
+                <app-button (click)="generateusername()" classStyle="btn action-btn">
                     Generate a Random Name
                 </app-button>
 
-                <app-button [disabled]="playerName.length <= 0" (click)="generateNewRoom()" classStyle="btn action-btn">
+                <app-button [disabled]="username.length <= 0" (click)="generateNewRoom()" classStyle="btn action-btn">
                     Create New Room
                 </app-button>
             </div>
@@ -69,7 +69,8 @@
             </div>
 
             <div class="col-12 d-flex m-0 justify-content-center align-items-center btn-center">
-                <app-input classStyle="form-control m-0 custom-input" placeholder="Room Link / Room ID"
+                <app-input [value]="inputValue" (onValueChange)="inputValue = $event"
+                    classStyle="form-control m-0 custom-input" placeholder="Room Link / Room ID"
                     [validate]="validateRoomLink"></app-input>
             </div>
 

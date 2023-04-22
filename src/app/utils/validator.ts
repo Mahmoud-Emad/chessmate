@@ -1,8 +1,8 @@
 import { inputValidation } from './types';
 
-const RGLINK: RegExp =
+export const RGLINK: RegExp =
   /[(http(s)?):(www)?a-zA-Z0-9@:%._~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_.~#?&//=]*)/i;
-const RGUUID: RegExp =
+export const RGUUID: RegExp =
   /^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
 
 export const isValidRoomID = (
@@ -10,8 +10,6 @@ export const isValidRoomID = (
   validated: inputValidation
 ): inputValidation => {
   // Check if the incoming value is valid room uuid or valid room link;
-  console.log(validated);
-
   if (!RGUUID.test(value)) {
     validated.isValid = false;
     validated.errorMessage =
@@ -20,9 +18,8 @@ export const isValidRoomID = (
   } else {
     validated.isValid = true;
     validated.errorMessage = '';
+    return validated;
   }
-
-  return validated;
 };
 
 export const isValidRoomLink = (
