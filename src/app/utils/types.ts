@@ -4,19 +4,17 @@ export interface inputValidation {
 }
 
 export interface IMessage {
-  id?: string;
   content: string;
   isSystemMessage: boolean;
 }
 
 export interface IEvent {
+  id?: string;
   isMessage: boolean;
   isGameMove: boolean;
   message: IMessage;
   gameMove?: IGameMove;
   user: IUser;
-  players: number;
-  vistors: number;
 }
 
 export interface IUser {
@@ -27,9 +25,23 @@ export interface IUser {
 export interface ISession {
   user: IUser;
   roomID?: string;
+  reverse: boolean;
+  isVistor: boolean;
 }
 
-export interface IGameMove {}
+export interface IGameMove {
+  move: string;
+  piece: string;
+  color: string;
+  x: boolean;
+  check: boolean;
+  mate: boolean;
+  checkmate: boolean;
+  fen: string;
+  freeMode: boolean;
+  pgn: { pgn: string };
+  stalemate: boolean;
+}
 
 export interface RoomStore {
   roomID: string;

@@ -9,7 +9,7 @@ import {
   isValidRoomLink,
 } from 'src/app/utils/validator';
 import { v4 as uuidv4 } from 'uuid';
-import { FormGroup } from '@angular/forms';
+import { generateUsername } from 'src/app/utils/helpers';
 
 @Component({
   selector: 'app-homepage',
@@ -24,16 +24,19 @@ export class HomepageComponent implements OnInit {
   public username: string = '';
   public inputValue: string = '';
 
-  ngOnInit(): void {}
-
-  generateUUID(): string {
-    return uuidv4();
+  ngOnInit(): void {
+    window.addEventListener('beforeunload', () => {
+      this.removeSession();
+    });
   }
 
   generateNewRoom() {
+    this.removeSession();
     const session: ISession = {
       user: { username: this.username, isPlayer: true },
       roomID: uuidv4(),
+      reverse: false,
+      isVistor: false,
     };
     localStorage.setItem('session', JSON.stringify(session));
     this.router.navigate([`/room/${session.roomID}`]);
@@ -42,15 +45,18 @@ export class HomepageComponent implements OnInit {
   displayJoinRoomInput(): void {
     this.isInvitation = true;
     this.isNewGame = false;
+    this.removeSession();
     if (this.validateRoomLink(this.inputValue).isValid) {
       const session: ISession = {
-        user: { username: this.username, isPlayer: true },
+        user: { username: generateUsername(), isPlayer: false },
         roomID: this.inputValue,
+        reverse: true,
+        isVistor: false,
       };
       localStorage.setItem('session', JSON.stringify(session));
       if (RGLINK.test(this.inputValue)) {
-        this.router.navigate([this.inputValue]);
         // Link Case.
+        this.router.navigate([this.inputValue]);
       } else {
         if (RGUUID.test(this.inputValue)) {
           this.router.navigate([`/room/${this.inputValue}`]);
@@ -90,20 +96,13 @@ export class HomepageComponent implements OnInit {
   }
 
   generateusername(): string {
-    const words = [
-      'Galaxy',
-      'Nebula',
-      'Cosmos',
-      'Star',
-      'Planet',
-      'Asteroid',
-      'Comet',
-      'Meteor',
-      'Gravity',
-      'Orbit',
-    ];
-    const index = Math.floor(Math.random() * words.length);
-    this.username = words[index];
+    this.username = generateUsername();
     return this.username;
+  }
+
+  removeSession() {
+    if (localStorage.getItem('session')) {
+      localStorage.removeItem('session');
+    }
   }
 }

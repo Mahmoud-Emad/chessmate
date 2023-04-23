@@ -1,30 +1,57 @@
 <div class="container">
+    <div class="alert mt-4 text-light room-info">
+        <p class="text-bold">
+            Player <strong class="text-warning">{{user.username}}</strong>
+        </p>
+        <p class="text-bold">
+            Room ID <strong class="text-warning">{{session.roomID}}</strong>
+        </p>
+        <p class="text-bold" *ngIf="session.isVistor">
+            Vistor Mode <strong class="text-warning">{{session.isVistor}}</strong>
+        </p>
+    </div>
     <div class="row">
         <div class="col-4">
             <div class="logger">
                 <div class="message-box">
-                    <div class="system-message text-center w-100">
-                        <small class="text-light">
-                            <strong class="text-warning">System message</strong> Player
-                            <strong class="text-warning">
-                                <!-- `{{event.user.username}}` -->
-                            </strong>
-                            has been joined!
-                        </small>
-                    </div>
-
-                    <div *ngFor="let message of messages">
-                        <span>
-                            {{event}}
-                        </span>
-                        <!-- <div *ngIf="message.username == username && message.roomID == roomID"
-                            class="player1-message">
+                    <div *ngFor="let event of events">
+                        <div *ngIf="event.message.content.length > 0 && event.isMessage; then isMessage">
                         </div>
-                        <div *ngIf else class="player2-message">
-                            <span>
-                                {{message.message}}
-                            </span>
-                        </div> -->
+                        <ng-template #isMessage>
+                            <div *ngIf="event.message.isSystemMessage; then sysMessage else playerMessage"></div>
+                            <ng-template #sysMessage>
+                                <div class="system-message text-center w-100">
+                                    <small class="text-light">
+                                        <strong class="text-warning">System message</strong> Player
+                                        <strong class="text-warning">
+                                            `{{event.user.username}}`
+                                        </strong>
+                                        {{event.message.content}}
+                                    </small>
+                                </div>
+                            </ng-template>
+                            <ng-template #playerMessage>
+                                <div *ngIf="event.user.username == user.username; then sender else receiver">
+                                </div>
+                                <ng-template #sender>
+                                    <div class="sender">
+                                        <small class="player-name">{{event.user.username}}</small>
+                                        <span>
+                                            {{event.message.content}}
+                                        </span>
+                                    </div>
+                                </ng-template>
+                                <ng-template #receiver>
+                                    <div class="receiver">
+                                        <small class="player-name text-primary">{{event.user.username}}</small>
+                                        <span>
+                                            {{event.message.content}}
+                                        </span>
+                                    </div>
+                                </ng-template>
+                            </ng-template>
+                        </ng-template>
+
                     </div>
 
                 </div>
@@ -51,7 +78,7 @@
             </div>
         </div>
         <div class="col-8 d-flex justify-content-center align-items-center">
-            <iframe class="iframe" src="http://localhost:4200/board" frameborder="0"></iframe>
+            <app-board></app-board>
         </div>
     </div>
 </div>

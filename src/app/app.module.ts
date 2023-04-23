@@ -44,7 +44,7 @@ import { MatDividerModule } from '@angular/material/divider';
     MatDividerModule,
     MatFormFieldModule,
 
-    NgxChessBoardModule,
+    NgxChessBoardModule.forRoot(),
     AppRoutingModule,
     RouterModule,
     AngularFireModule.initializeApp(environment.firebase),

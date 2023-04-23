@@ -3,62 +3,76 @@
     color: wheat;
     background: #00000061;
     padding: 15px;
-    margin-top: 8rem;
+    margin-top: 3rem;
     margin-bottom: 20px;
     overflow-y: scroll;
     overflow-x: hidden;
     position: relative;
+    scroll-behavior: smooth;
 }
 
-.player1-message {
+.sender {
     padding: 15px;
     background: #5e5e5e42;
-    border-radius: 31px 1px 1px 1px;
+    border-radius: 1px 10px 10px 30px;
     font-size: 18px;
-    margin-top: 15px;
     color: #ffdb58;
     width: 95%;
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    position: absolute;
-    bottom: 15px;
-    margin-left: -10px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    margin-left: 10px;
 }
 
-.player2-message {
-    padding: 15px;
-    background: #5e5e5e42;
-    border-radius: 1px 1px 35px 1px;
-    font-size: 18px;
-    margin-top: 15px;
-    color: #ffdb58;
-    width: 100%;
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    bottom: 15px;
-    margin-right: -10px;
-}
-
-.player1-message::before {
+.sender::before {
     content: "•";
     color: rgb(21, 214, 63);
     font-size: 24px;
     margin-right: 10px;
 }
 
-.player2-message::after {
-    content: "•";
+.receiver {
+    padding: 15px;
     margin-left: 10px;
+    background: #5e5e5e42;
+    border-radius: 1px 10px 10px 30px;
+    font-size: 18px;
+    color: #ffdb58;
+    width: 95%;
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+.receiver::before {
+    content: "•";
+    margin-right: 10px;
     color: rgb(0, 116, 248);
     font-size: 24px;
 }
 
+.player-name {
+    color: rgb(21, 214, 63);
+    margin-right: 5px;
+}
+
 .iframe {
     height: 540px;
-    width: 60%;
+    width: 100%;
     overflow: hidden;
     box-shadow: 0 4px 6px rgb(0 0 0 / 10%);
     margin-top: 8rem;
+}
+
+.modal-join {
+    display: block;
+    background: #70231285;
+}
+
+.room-info {
+    width: 35%;
+    background: #5a564fba;
 }
