@@ -3,14 +3,7 @@ import { NgxChessBoardComponent } from 'ngx-chess-board';
 import { IEvent, IGameMove, ISession } from 'src/app/utils/types';
 import { environment } from './../../utils/environment';
 import { FirebaseApp, initializeApp } from 'firebase/app';
-import {
-  Database,
-  getDatabase,
-  onValue,
-  ref,
-  set,
-  remove,
-} from 'firebase/database';
+import { Database, getDatabase, onValue, ref, set } from 'firebase/database';
 import { v4 as uuidv4 } from 'uuid';
 
 @Component({
@@ -100,7 +93,6 @@ export class BoardComponent implements OnInit {
             this.event = events[id];
             if (this.event.gameMove) {
               this.board.move(this.event.gameMove.move);
-              // remove(ref(this.db, `${this.session.roomID}/${this.event.id}`));
             }
           }
         }

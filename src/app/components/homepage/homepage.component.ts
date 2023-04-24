@@ -30,10 +30,15 @@ export class HomepageComponent implements OnInit {
 
   ngOnInit(): void {
     window.addEventListener('beforeunload', () => {
-      if (this.getSession().isVistor) {
-        this.removeSession();
+      if (this.getSession().user.isPlayer) {
+        this.playerLeftRoom();
       }
+      this.removeSession();
     });
+  }
+
+  playerLeftRoom() {
+    alert('Player left the room');
   }
 
   generateNewRoom() {
