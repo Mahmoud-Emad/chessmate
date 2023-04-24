@@ -6,7 +6,6 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { FirebaseApp, initializeApp } from 'firebase/app';
 import { ActivatedRoute, Router } from '@angular/router';
 import { v4 as uuidv4 } from 'uuid';
-import { FirebaseService } from 'src/app/services/firebase.service';
 import { generateUsername } from 'src/app/utils/helpers';
 
 @Component({
@@ -27,12 +26,12 @@ export class GameComponent implements OnInit {
     isGameMove: false,
     user: { username: '', isPlayer: false },
     message: { isSystemMessage: false, content: '' },
+    roomID: '',
   };
 
   constructor(
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
-    private firebaseService: FirebaseService,
     private router: Router
   ) {
     const session = localStorage.getItem('session');
@@ -59,13 +58,12 @@ export class GameComponent implements OnInit {
   }
 
   onMessageSubmit(form: { messageContent: string }) {
-    console.log(this.session);
-
     if (this.session) {
       this.event.message.content = form.messageContent;
       this.event.id = uuidv4();
       this.event.isMessage = true;
       this.event.user = this.session.user;
+      this.event.roomID = this.session.roomID;
       set(ref(this.db, `${this.session.roomID}/${this.event.id}`), this.event);
       this.form = this.formBuilder.group({ messageContent: '' });
     }
@@ -81,10 +79,17 @@ export class GameComponent implements OnInit {
       isMessage: true,
       isGameMove: false,
       user: session.user,
+      roomID: session.roomID,
     };
   }
   ngOnInit(): void {
     if (this.session) {
+      const roomID = this.route.snapshot.paramMap.get('roomID');
+      if (roomID && this.session.roomID != roomID) {
+        this.session.roomID = roomID;
+        // Return user back to enter using the join room button to update the sesstion.
+        this.router.navigate([`/`]);
+      }
       const messagesRef = ref(this.db, this.session.roomID);
       this.onJoinUser(this.session);
       onValue(messagesRef, (snapshot: any) => {
@@ -107,15 +112,6 @@ export class GameComponent implements OnInit {
   onJoinUser(session: ISession) {
     if (session.roomID) {
       const newJoinedEvent = this.newJoinedUser(session);
-      this.user = session.user;
-      this.firebaseService.getData(session).subscribe((events) => {
-        const hasTwoPlayers = events.filter((event) => event.players > 1);
-        if (hasTwoPlayers.length) {
-          session.user.isPlayer = false;
-        } else {
-          session.user.isPlayer = true;
-        }
-      });
       set(
         ref(this.db, `${session.roomID}/${newJoinedEvent.id}`),
         newJoinedEvent

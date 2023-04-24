@@ -6,7 +6,6 @@ import { AppComponent } from './app.component';
 import { HomepageComponent } from './components/homepage/homepage.component';
 import { BoardComponent } from './components/board/board.component';
 import { NgxChessBoardModule } from 'ngx-chess-board';
-import { PlayLocalComponent } from './components/play-local-component/play-local-component.component';
 import { ButtonComponent } from './components/button/button.component';
 import { InputComponent } from './components/input/input.component';
 import { GameComponent } from './components/game/game.component';
@@ -28,7 +27,6 @@ import { MatDividerModule } from '@angular/material/divider';
     AppComponent,
     HomepageComponent,
     BoardComponent,
-    PlayLocalComponent,
     ButtonComponent,
     InputComponent,
     GameComponent,

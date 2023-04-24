@@ -33,6 +33,7 @@ export class BoardComponent implements OnInit {
     isGameMove: false,
     user: { username: '', isPlayer: false },
     message: { isSystemMessage: false, content: '' },
+    roomID: '',
   };
   constructor(private cdr: ChangeDetectorRef) {
     this.app = initializeApp(environment.firebase);
@@ -47,6 +48,7 @@ export class BoardComponent implements OnInit {
     this.event.gameMove = move;
     this.event.id = uuidv4();
     this.event.user = this.session.user;
+    this.event.roomID = this.session.roomID;
     return set(
       ref(this.db, `${this.session.roomID}/${this.event.id}`),
       this.event
@@ -90,6 +92,7 @@ export class BoardComponent implements OnInit {
       this.session = JSON.parse(session);
       this.reverseBoard(this.session);
       const messagesRef = ref(this.db, this.session.roomID);
+
       onValue(messagesRef, (snapshot: any) => {
         const events: IEvent[] = snapshot.val() != null ? snapshot.val() : [];
         for (let id in events) {
@@ -97,7 +100,7 @@ export class BoardComponent implements OnInit {
             this.event = events[id];
             if (this.event.gameMove) {
               this.board.move(this.event.gameMove.move);
-              remove(ref(this.db, `${this.session.roomID}/${this.event.id}`));
+              // remove(ref(this.db, `${this.session.roomID}/${this.event.id}`));
             }
           }
         }

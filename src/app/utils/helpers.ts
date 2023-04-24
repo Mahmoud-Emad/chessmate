@@ -12,7 +12,5 @@ export function generateUsername(): string {
     'Orbit',
   ];
   const index = Math.floor(Math.random() * words.length);
-  console.log(words[index]);
-
   return words[index];
 }

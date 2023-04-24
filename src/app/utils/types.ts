@@ -8,15 +8,25 @@ export interface IMessage {
   isSystemMessage: boolean;
 }
 
+export interface HistoryMove {
+  move: string;
+  piece: string;
+  color: string;
+  x: boolean;
+  check: boolean;
+  stalemate: boolean;
+}
+
 export interface IEvent {
+  roomID?: string;
   id?: string;
   isMessage: boolean;
   isGameMove: boolean;
   message: IMessage;
   gameMove?: IGameMove;
   user: IUser;
+  history?: HistoryMove[];
 }
-
 export interface IUser {
   username: string;
   isPlayer: boolean;
