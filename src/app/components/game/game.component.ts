@@ -1,12 +1,5 @@
 import { environment } from './../../utils/environment';
-import {
-  Component,
-  HostListener,
-  OnInit,
-  OnDestroy,
-  Output,
-  EventEmitter,
-} from '@angular/core';
+import { Component, HostListener, OnInit, OnDestroy } from '@angular/core';
 import {
   getDatabase,
   Database,
@@ -42,8 +35,6 @@ export class GameComponent implements OnInit, OnDestroy {
     roomID: '',
   };
   vistors: Array<String> = [];
-  @Output() playerLeft = new EventEmitter();
-
   constructor(
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
@@ -125,7 +116,6 @@ export class GameComponent implements OnInit, OnDestroy {
       }
       set(ref(this.db, `${session.roomID}/${this.event.id}`), this.event);
       this.events = this.events.filter((event) => event.isGameMove != true);
-      this.playerLeft.emit('playerLeft');
     }
     return this.event;
   }
@@ -138,9 +128,6 @@ export class GameComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.playerLeft.emit('playerLeft');
-    console.log('Player left ');
-    ('playerLeft');
     if (this.session) {
       const messagesRef = ref(this.db, this.session.roomID);
       const roomID = this.route.snapshot.paramMap.get('roomID');
