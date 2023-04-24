@@ -1,27 +1,78 @@
-# ChessApp
+# ChessMate
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.2.18.
+ChessMate is an online chess game that allows users to play chess with each other in real-time. It allows users to create a room with a generated username and room ID, join a room using the generated room ID, and play chess with other users in the same room.
 
-## Development server
+## Features
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+- Create a room with a generated username and room ID
+- Join a room using the generated room ID
+- Play chess with other users in the same room
+- Chat with other users in the same room
+- Detect when a user enters or leaves the room
 
-## Code scaffolding
+## Getting Started
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+To get started with ChessMate, follow these steps:
 
-## Build
+- Clone the repository to your local machine:
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+```sh
+git clone https://github.com/Mahmoud-Emad/chessmate.git
+```
 
-## Running unit tests
+- Install the dependencies:
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+```sh
+cd chessmate
+npm install
+```
 
-## Running end-to-end tests
+- Set up Firebase for your project by creating a new Firebase project, setting up the Firebase CLI, and creating a Firebase Realtime Database.
+- Replace the Firebase configuration in src/utils/environment.ts with your own Firebase configuration.
+- Start the server:
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+```sh
+ng start
+```
 
-## Further help
+- Open your browser and go to [localhost:4200](http://localhost:4200).
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+## Usage
+
+To use ChessMate, follow these steps:
+
+- Visit the ChessMate website.
+- Click on the "Create Room" button to create a new room with a generated username and room ID.
+- Share the generated room ID with other users you want to play with.
+- Other users can join the room by entering the generated room ID on the "Join Room" card.
+- Once all users have joined the room, the game can begin.
+- Use the chessboard to play the game.
+- Chat with other users in the room using the chat feature.
+- When the game is over, users who are not playing can watch the game as spectators. `feature will be implemented soon, if user did a refresh to the page will watch the game as a spectator`
+- When user enter the room in anytime of the game, the game history will be loaded.
+
+## Contributing
+
+If you'd like to contribute to ChessMate, follow these steps:
+
+- Fork the repository.
+- Create a new branch for your feature or bug fix:
+
+```sh
+git checkout -b feature/your-feature-name
+```
+
+- Make changes and commit them:
+
+```sh
+git add .
+git commit -m "Your commit message"
+```
+
+- Push your changes to your fork:
+
+```sh
+git push origin feature/your-feature-name
+```
+
+- Create a pull request.
