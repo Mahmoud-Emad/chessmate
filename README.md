@@ -41,7 +41,7 @@ ng start
 
 To use ChessMate, follow these steps:
 
-- Visit the ChessMate website.
+- Visit the [ChessMate](https://chess-app-25fb5.web.app/) website.
 - Click on the "Create Room" button to create a new room with a generated username and room ID.
 - Share the generated room ID with other users you want to play with.
 - Other users can join the room by entering the generated room ID on the "Join Room" card.
