@@ -76,3 +76,6 @@ git push origin feature/your-feature-name
 ```
 
 - Create a pull request.
+
+### PS
+There is an issue in the `ngx-chess-board` happned when trying to interact in the game and opned in https://github.com/grzegorz103/ngx-chess-board/issues/218
